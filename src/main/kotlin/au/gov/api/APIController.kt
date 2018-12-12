@@ -26,7 +26,7 @@ class APIController {
     private lateinit var environment: Environment
 
     private fun isAuthorisedToSaveService(request:HttpServletRequest, space:String):Boolean{
-        //if(environment.getActiveProfiles().contains("prod")){
+        if(environment.getActiveProfiles().contains("prod")){
             val AuthURI = System.getenv("AuthURI")?: throw RuntimeException("No environment variable: AuthURI")
 
             // http://www.baeldung.com/get-user-in-spring-security
@@ -44,8 +44,8 @@ class APIController {
             )
             if(authorisationRequest.statusCode != 200) return false
             return authorisationRequest.text == "true"
-        //}
-        //return true
+        }
+        return true
     }
 
     @PostMapping("/api/new")
