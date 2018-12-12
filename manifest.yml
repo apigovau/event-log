@@ -1,0 +1,12 @@
+---
+applications:
+- name: event-log
+  memory: 1G
+  buildpack: java_buildpack
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+  path: build/libs/event-log-1.0.jar
+  services:
+  - api-gov-au-event-log-db
+  routes:
+  - route: api.gov.au/logs/
