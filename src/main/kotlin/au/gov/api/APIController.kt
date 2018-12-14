@@ -1,6 +1,7 @@
 
 package au.gov.api
 
+import au.gov.api.config.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -27,7 +28,7 @@ class APIController {
 
     private fun isAuthorisedToSaveService(request:HttpServletRequest, space:String):Boolean{
         if(environment.getActiveProfiles().contains("prod")){
-            val AuthURI = System.getenv("AuthURI")?: throw RuntimeException("No environment variable: AuthURI")
+            val AuthURI = Config.get("AuthURI")
 
             // http://www.baeldung.com/get-user-in-spring-security
             val raw = request.getHeader("authorization")
@@ -38,7 +39,7 @@ class APIController {
             val pass= apikey.split(":")[1]
 
 
-            val authorisationRequest = get(AuthURI + "/api/canWrite",
+            val authorisationRequest = get(AuthURI + "api/canWrite",
                     params=mapOf("space" to space),
                     auth=BasicAuthorization(user, pass)
             )
