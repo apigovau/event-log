@@ -5,6 +5,7 @@ applications:
   buildpack: java_buildpack
   env:
     SPRING_PROFILES_ACTIVE: prod
+    config_environment: y.cld.gov.au
   path: build/libs/event-log-1.0.jar
   services:
   - api-gov-au-event-log-db
