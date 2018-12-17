@@ -1,7 +1,8 @@
 ---
 applications:
 - name: api-gov-au-event-log
-  memory: 1G
+  memory: 768M
+  disk_quota: 256M
   buildpack: java_buildpack
   env:
     SPRING_PROFILES_ACTIVE: prod
