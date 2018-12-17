@@ -1,6 +1,6 @@
 ---
 applications:
-- name: api-gov-au-event-log
+- name: staging-api-gov-au-event-log
   memory: 1G
   buildpack: java_buildpack
   env:
@@ -9,6 +9,6 @@ applications:
     JAVA_OPTS: -Duser.timezone=Australia/Canberra
   path: build/libs/event-log-1.0.jar
   services:
-  - api-gov-au-event-log-db
+  - staging-api-gov-au-event-log-db
   routes:
   - route: staging.api.gov.au/logs/
