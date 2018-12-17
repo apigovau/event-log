@@ -14,14 +14,19 @@ source "$(dirname "$0")/buildrc"
 
 # login to cloud foundry if env vars are present
 login() {
-
   if [[ -z "$CF_ORG" ]]; then
     echo "CF env vars not found, assuming you are already logged in to cf"
     return
   fi
 
-  cf api $CF_API
-  cf auth "$CF_USER" "$CF_PASSWORD"
+  if [[ "${CIRCLE_BRANCH}" = "master" ]]; then
+    cf api $CF_PROD_API
+    cf auth "$CF_USER" "$CF_PASSWORD_PROD"
+  else
+    cf api $CF_STAGING_API
+    cf auth "$CF_USER" "$CF_PASSWORD_STAGING"
+  fi
+
   cf target -o $CF_ORG
   cf target -s $CF_SPACE
 }
@@ -30,7 +35,11 @@ login() {
 #
 main() {
   login
-  cf push api-gov-au-event-log -f manifest-stating.yml
+  if [[ "${CIRCLE_BRANCH}" = "master" ]]; then
+    cf push api-gov-au-event-log -f manifest-stating.yml
+  else
+    cf push api-gov-au-event-log -f manifest-stating.yml
+  fi
 }
 
 main $@
