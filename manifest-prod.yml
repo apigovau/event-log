@@ -1,6 +1,6 @@
 ---
 applications:
-- name: event-log
+- name: api-gov-au-event-log
   memory: 768M
   disk_quota: 512M
   buildpack: java_buildpack
