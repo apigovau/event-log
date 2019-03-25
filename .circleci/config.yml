@@ -39,7 +39,7 @@ jobs:
       
       # run tests!
       - run: gradle test
-        - 
+
       - run:
           name: Deploying to cloud.gov.au
           command: bash ./scripts/deploy.sh
