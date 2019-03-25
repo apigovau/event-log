@@ -39,12 +39,7 @@ jobs:
       
       # run tests!
       - run: gradle test
-
-      # Set up CF
-      - run:
-          name: Setup CF CLI
-          command: |
-
+        - 
       - run:
           name: Deploying to cloud.gov.au
           command: bash ./scripts/deploy.sh
