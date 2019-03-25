@@ -5,6 +5,7 @@ jobs:
       only:
         - master
         - staging
+        - prod
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -43,9 +44,7 @@ jobs:
       - run:
           name: Setup CF CLI
           command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-            sudo dpkg -i cf-cli_amd64.deb
-            cf -v
+
       - run:
           name: Deploying to cloud.gov.au
           command: bash ./scripts/deploy.sh
