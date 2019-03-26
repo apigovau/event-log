@@ -26,7 +26,10 @@ login() {
     return
   fi
 
-  if [[ "${CIRCLE_BRANCH}" = "master" ]]; then
+  if [[ "${CIRCLE_BRANCH}" = "staging" ]]; then
+    cf api $CF_PROD_API
+    cf auth "$CF_USER" "$CF_PASSWORD_PROD"
+  elif [[ "${CIRCLE_BRANCH}" = "prod" ]]; then
     cf api $CF_PROD_API
     cf auth "$CF_USER" "$CF_PASSWORD_PROD"
   else
@@ -42,10 +45,10 @@ login() {
 #
 main() {
   login
-  if [[ "${CIRCLE_BRANCH}" = "master" ]]; then
-    cf push staging-api-gov-au-event-log -f manifest-staging.yml
-  else
-    cf push staging-api-gov-au-event-log -f manifest-staging.yml
+  if [[ "${CIRCLE_BRANCH}" = "staging" ]]; then
+    cf push "staging-${APPNAME}" -f manifest-staging.yml
+  elif [[ "${CIRCLE_BRANCH}" = "prod" ]]; then
+    cf push "${APPNAME}" -f manifest-prod.yml
   fi
 }
 
