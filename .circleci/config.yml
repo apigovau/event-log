@@ -39,9 +39,15 @@ jobs:
       # run tests!
       - run: gradle test
 
+      # get the build scripts
+      - run:
+          name: Download the build scripts
+          command: |
+            curl -v -L -o cf-cli_amd64.deb 'https://raw.githubusercontent.com/apigovau/build/master/buildrc'
+            curl -v -L -o cf-cli_amd64.deb 'https://raw.githubusercontent.com/apigovau/build/master/deploy.sh'
       - run:
           name: Deploying to cloud.gov.au
-          command: bash ./scripts/deploy.sh
+          command: bash .deploy.sh
           environment:
             APPNAME: api-gov-au-event-log
 
