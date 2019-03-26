@@ -3,6 +3,7 @@ jobs:
   build:
     branches:
       only:
+        - master
         - staging
         - prod
     docker:
