@@ -3,7 +3,6 @@ jobs:
   build:
     branches:
       only:
-        - master
         - staging
         - prod
     docker:
@@ -43,5 +42,7 @@ jobs:
       - run:
           name: Deploying to cloud.gov.au
           command: bash ./scripts/deploy.sh
+          environment:
+            APPNAME: api-gov-au-event-log
 
 
