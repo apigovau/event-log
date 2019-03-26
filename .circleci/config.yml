@@ -47,7 +47,7 @@ jobs:
             curl -v -L -o "deploy.sh" 'https://raw.githubusercontent.com/apigovau/build/master/deploy.sh'
       - run:
           name: Deploying to cloud.gov.au
-          command: bash .deploy.sh
+          command: bash ./deploy.sh
           environment:
             APPNAME: api-gov-au-event-log
 
