@@ -15,14 +15,16 @@ class Event(){
     var type:String = ""
     var name:String = ""
     var reason:String = ""
+    var content:String = ""
 
-    constructor(iKey:String, iAction:String,iType:String,iName:String,iReason:String) : this(){
+    constructor(iKey:String, iAction:String,iType:String,iName:String,iReason:String, icontent:String) : this(){
         timestamp = Date(System.currentTimeMillis()).toString()
         key = iKey
         action = iAction
         type = iType
         name = iName
         reason = iReason
+        content = icontent
     }
 
     override fun toString() = "Event(${timestamp}):"
